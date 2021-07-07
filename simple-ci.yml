@@ -8,14 +8,14 @@ steps:
   clone:
     title: "Cloning repository"
     type: "git-clone"
-    repo: "codefresh-contrib/gitops-app-source-code"
+    repo: "lrochette/${{CF_REPO_NAME}}"
     revision: '${{CF_REVISION}}'
     stage: "clone"
 
   build:
     title: "Building Docker image"
     type: "build"
-    image_name: "kostiscodefresh/simple-web-app"
+    image_name: "lrochette/argocd-my-app"
     working_directory: "${{clone}}"
     tags:
     - "latest"
@@ -28,19 +28,19 @@ steps:
     type: image-enricher
     stage: "metadata"
     arguments:
-      IMAGE:  docker.io/kostiscodefresh/simple-web-app:latest
+      IMAGE:  docker.io/lrochette/argocd-my-app:latest
       BRANCH: '${{CF_BRANCH}}'
-      REPO: 'kostis-codefresh/simple-web-app'
-      GIT_PROVIDER_NAME: github-1
+      REPO: 'lrochette/${{CF_REPO_NAME}}'
+      GIT_PROVIDER_NAME: github
   jira-issue-extractor:
     title: Enrich image with jira issues
     type: jira-issue-extractor
     stage: "metadata"
     fail_fast: false
     arguments:
-      IMAGE: docker.io/kostiscodefresh/simple-web-app:latest
-      JIRA_PROJECT_PREFIX: 'SAAS'
-      MESSAGE: SAAS-8431
+      IMAGE: docker.io/lrochette/argocd-my-app:latest
+      JIRA_PROJECT_PREFIX: 'TAM'
+      MESSAGE: TAM-1
       JIRA_HOST: codefresh-io.atlassian.net
-      JIRA_EMAIL: kostis@codefresh.io
+      JIRA_EMAIL: laurent.rochette@codefresh.io
       JIRA_API_TOKEN: '${{JIRA_TOKEN}}'
