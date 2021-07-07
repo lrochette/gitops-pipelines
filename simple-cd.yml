@@ -15,9 +15,9 @@ steps:
     title: Sync ArgoCD app and wait
     type: argocd-sync
     arguments:
-      context: "argo-cd"
+      context: argocd
       app_name: "${{ARGOCD_APP_NAME}}"
-      wait_healthy: true   
+      wait_healthy: true
     stage: "sync app"
   post_sync:
     title: "Post sync commands"
