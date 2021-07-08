@@ -83,3 +83,11 @@ steps:
       branch:
         only:
           - master
+  sync_and_wait:
+    title: Sync ArgoCD app and wait
+    type: argocd-sync
+    arguments:
+      context: argocd
+      app_name: "${{ARGOCD_APP_NAME}}"
+      wait_healthy: true
+    stage: "gitops"
