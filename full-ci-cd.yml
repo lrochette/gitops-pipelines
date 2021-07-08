@@ -59,9 +59,9 @@ steps:
           - master
   change_manifest:
     title: "Update k8s manifest"
-    image: codefresh/cli #"mikefarah/yq" # The image in which command will be executed
+    image: "mikefarah/yq:3" #"mikefarah/yq" # The image in which command will be executed
     commands:
-      - yq w -y -i deployment.yml spec.template.spec.containers[0].image docker.io/lrochette/argocd-my-app:${{CF_SHORT_REVISION}}
+      - yq w -i deployment.yml spec.template.spec.containers[0].image docker.io/lrochette/argocd-my-app:${{CF_SHORT_REVISION}}
       - cat deployment.yml
     working_directory: "${{clone_gitops}}"
     stage: "gitops"
