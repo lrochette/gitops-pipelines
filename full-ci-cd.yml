@@ -23,7 +23,7 @@ steps:
     - '${{CF_SHORT_REVISION}}'
     dockerfile: "Dockerfile"
     stage: "build"
-    registry: dockerhub
+    registry: docker-lr
   enrich-image:
     title: Add PR info
     type: image-enricher
