@@ -19,8 +19,8 @@ steps:
     image_name: "lrochette/argocd-my-app"
     working_directory: "${{clone}}"
     tags:
-    - "latest"
-    - '${{CF_SHORT_REVISION}}'
+      - "latest"
+      - '${{CF_SHORT_REVISION}}'
     dockerfile: "Dockerfile"
     stage: "build"
     registry: docker-lr
